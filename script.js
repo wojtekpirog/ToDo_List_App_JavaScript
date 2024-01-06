@@ -31,14 +31,9 @@ const prepareDOMEvents = () => {
   addBtn.addEventListener("click", addTodo);
   ulList.addEventListener("click", checkClick);
   saveBtn.addEventListener("click", changeTodoText);
-  cancelBtn.addEventListener("click", closePopup);
-  todoInput.addEventListener("keyup", e => {
-    if (e.code === "Enter") addTodo();
-  });    
-  popupInput.addEventListener("keyup", e => {
-    if (e.code === "Enter") changeTodoText();
-    if (e.code === "Escape") closePopup();
-  });
+  cancelBtn.addEventListener("click", closePopup); 
+  todoInput.addEventListener("keyup", addTodoOnEnterClick);
+  popupInput.addEventListener("keyup", changeTodoTextOnEnterClick);
 }
 
 const setInitialErrorInfo = () => {
@@ -80,7 +75,6 @@ const addToolsArea = (newTask) => {
 }
 
 const editTodo = (e) => {
-  // Staraj się unikać stylowania w JavaScript
   popup.classList.add("popup-active");
   todoToEdit = e.target.closest("li");
   popupInput.value = todoToEdit.firstChild.textContent;
@@ -116,6 +110,14 @@ const checkClick = e => {
   } else if (e.target.matches(".tomato")) {
     removeTodo(e);   
   }
+}
+
+const addTodoOnEnterClick = (e) => {
+  if (e.key === "Enter") addTodo();
+}
+
+const changeTodoTextOnEnterClick = (e) => {
+  if (e.key === "Enter") changeTodoText();
 }
 
 document.addEventListener("DOMContentLoaded", main);
