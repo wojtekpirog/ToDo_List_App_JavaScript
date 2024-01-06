@@ -17,30 +17,21 @@
     <!-- Header -->
     <div class="header">
       <h1>ToDo List</h1>
-      <input class="todo-input" placeholder="Enter your task's name...">
+      <input id="todo-input" class="todo-input" placeholder="Enter your task's name...">
       <button class="add-btn">Add</button>
     </div>
     <!-- List Body -->
     <div class="todo-list">
       <h3>List of Tasks</h3>
-      <p class="error-info">No tasks on the list.</p>
-      <ul>
-        <!-- <li data-id="task1">
-          Get groceries
-          <div class="tools">
-            <button><i class="fas fa-check lime"></i></button>
-            <button class="bold">EDIT</button>
-            <button><i class="fas fa-times tomato"></i></button>
-          </div>
-        </li> -->
-      </ul>
+      <p class="error-info"></p>
+      <ul></ul>
     </div>
     <!-- Popup -->
     <div class="popup">
       <h3>Edit your task:</h3>
       <div class="popup-body">
         <p class="popup-info"></p>
-        <input class="popup-input" placeholder="Enter the new name of your task...">
+        <input id="popup-input" class="popup-input" placeholder="Enter the new name of your task...">
         <button class="popup-btn save">Save</button>
         <button class="popup-btn cancel">Cancel</button>
       </div>

@@ -4,18 +4,18 @@ let addBtn; // Przycisk ADD
 let ulList; // Lista zadań
 let popup; // Popup do edycji danego zadania
 let popupInfo; // Tekst w popup z info o błędzie
-let todoToExit; // Edytowany todo
+let todoToEdit; // Edytowany todo
 let popupInput; // Input wewnątrz popup
-let acceptBtn; // Przycisk "Zatwierdź w popupie"
+let saveBtn; // Przycisk "Zatwierdź w popupie"
 let cancelBtn; // Przycisk "Anuluj" w popupie
 
 const main = () => {
   prepareDOMElements();
   prepareDOMEvents();
+  setInitialErrorInfo();
 }
 
 const prepareDOMElements = () => {
-  // Tu pobieram elementy
   todoInput = document.querySelector(".todo-input");
   errorInfo = document.querySelector(".error-info");
   addBtn = document.querySelector(".add-btn");
@@ -23,18 +23,26 @@ const prepareDOMElements = () => {
   popup = document.querySelector(".popup");
   popupInfo = document.querySelector(".popup-info");
   popupInput = document.querySelector(".popup-input");
-  acceptBtn = document.querySelector(".save");
+  saveBtn = document.querySelector(".save");
   cancelBtn = document.querySelector(".cancel");
 }
 
 const prepareDOMEvents = () => {
-  // Tu nadaję nasłuchiwanie
   addBtn.addEventListener("click", addTodo);
+  ulList.addEventListener("click", checkClick);
+  saveBtn.addEventListener("click", changeTodoText);
+  cancelBtn.addEventListener("click", closePopup);
   todoInput.addEventListener("keyup", e => {
     if (e.code === "Enter") addTodo();
+  });    
+  popupInput.addEventListener("keyup", e => {
+    if (e.code === "Enter") changeTodoText();
+    if (e.code === "Escape") closePopup();
   });
-  ulList.addEventListener("click", checkClick);
-  cancelBtn.addEventListener("click", closePopup);
+}
+
+const setInitialErrorInfo = () => {
+  errorInfo.textContent = "No tasks on the list.";
 }
 
 const addTodo = () => {
@@ -71,12 +79,32 @@ const addToolsArea = (newTask) => {
   newTask.append(toolsArea);
 }
 
-const editTodo = () => {
-  popup.style.display = "flex";
+const editTodo = (e) => {
+  // Staraj się unikać stylowania w JavaScript
+  popup.classList.add("popup-active");
+  todoToEdit = e.target.closest("li");
+  popupInput.value = todoToEdit.firstChild.textContent;
 }
 
 const closePopup = () => {
-  popup.style.display = "none";
+  popupInfo.textContent = "";
+  popupInfo.classList.remove("bold");
+  popup.classList.remove("popup-active");
+}
+
+const changeTodoText = () => {
+  if (popupInput.value !== "") {
+    todoToEdit.firstChild.textContent = popupInput.value;
+    closePopup();
+  } else {
+    popupInfo.textContent = "Your task must have a name!";
+    popupInfo.classList.add("bold");
+  }
+}
+
+const removeTodo = e => {
+  e.target.closest("li").remove();
+  if (ulList.childNodes.length === 0) errorInfo.textContent = "No tasks on the list.";
 }
 
 const checkClick = e => {
@@ -84,9 +112,9 @@ const checkClick = e => {
     e.target.closest("li").classList.toggle("completed");
     e.target.classList.toggle("completed");
   } else if (e.target.matches(".bold")) {
-    editTodo();
+    editTodo(e);
   } else if (e.target.matches(".tomato")) {
-    e.target.closest("li");    
+    removeTodo(e);   
   }
 }
 
