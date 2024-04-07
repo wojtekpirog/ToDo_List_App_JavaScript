@@ -1,0 +1,13 @@
+@use "./reset.scss" as reset;
+
+h1 {
+  height: 140px;
+  line-height: 140px;
+  text-align: center;
+  font-size: 5rem;
+  font-weight: 400;
+}
+
+.gallery {
+  height: calc(100vh - 140px);
+}

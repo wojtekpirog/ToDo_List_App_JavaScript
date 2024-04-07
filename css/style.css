@@ -1,0 +1,29 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  background-color: #0C0C0C;
+  color: #B0C5A4;
+  font-family: "Montserrat", sans-serif;
+}
+
+h1 {
+  height: 140px;
+  line-height: 140px;
+  text-align: center;
+  font-size: 5rem;
+  font-weight: 400;
+}
+
+.gallery {
+  height: calc(100vh - 140px);
+}/*# sourceMappingURL=style.css.map */
