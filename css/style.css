@@ -26,4 +26,120 @@ h1 {
 
 .gallery {
   height: calc(100vh - 140px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.gallery .card {
+  position: relative;
+  margin: 2em;
+  width: 30em;
+  height: 50em;
+  perspective: 1000px;
+}
+.gallery .card__image {
+  width: 100%;
+  height: 100%;
+  background-position: center;
+  background-size: cover;
+  border-radius: 8px;
+  padding: 1;
+  transition: transform 500ms ease-in-out, opacity 500ms ease-in-out;
+}
+.gallery .card__image--one {
+  background-image: url("../assets/images/rain-forest.jpg");
+}
+.gallery .card__image--two {
+  background-image: url("../assets/images/national-park.jpg");
+}
+.gallery .card__image--three {
+  background-image: url("../assets/images/lake.jpg");
+}
+.gallery .card__text {
+  position: absolute;
+  top: 0;
+  color: #0C0C0C;
+  padding: 32em 2em 2em;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  transition: all 500ms ease-in-out;
+  opacity: 0;
+}
+.gallery .card__text--one {
+  background-image: linear-gradient(135deg, #FEFDED 0%, #C6EBC5 70%);
+  transform: rotateX(-180deg);
+}
+.gallery .card__text--two {
+  background-image: linear-gradient(135deg, #DFF5FF 0%, #67C6E3 70%);
+  transform: rotateY(-180deg);
+}
+.gallery .card__text--three {
+  background-image: linear-gradient(135deg, #1F2544 0%, #474F7A 70%);
+  color: #DFF5FF;
+}
+.gallery .card__text--three .card__text__description {
+  color: #DFF5FF;
+}
+.gallery .card__text__title {
+  font-size: 3.2rem;
+  margin-bottom: 0.6rem;
+}
+.gallery .card__text__description {
+  color: #1b1b1b;
+  font-size: 1.6rem;
+  font-weight: 500;
+}
+.gallery .card:hover .card__image {
+  opacity: 0;
+}
+.gallery .card:hover .card__image--one {
+  transform: rotateX(-180deg);
+}
+.gallery .card:hover .card__image--two {
+  transform: rotateY(-180deg);
+}
+.gallery .card:hover .card__image--three {
+  opacity: 1;
+  animation: up 1s ease-in-out;
+}
+@keyframes up {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-60%);
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+.gallery .card:hover .card__text {
+  opacity: 1;
+}
+.gallery .card:hover .card__text--one {
+  transform: rotateX(0);
+}
+.gallery .card:hover .card__text--two {
+  transform: rotateY(0);
+}
+.gallery .card:hover .card__text--three {
+  animation: down 1s ease-in-out;
+}
+@keyframes down {
+  0% {
+    transform: translateY(0);
+    z-index: -1;
+  }
+  50% {
+    transform: translateY(60%);
+    z-index: -1;
+  }
+  100% {
+    z-index: 1;
+  }
 }/*# sourceMappingURL=style.css.map */
